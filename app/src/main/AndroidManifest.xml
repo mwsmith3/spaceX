@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpaceX"
         tools:ignore="AllowBackup">
-        <activity android:name=".MainActivity">
+        <activity android:name=".falcon9.ui.Falcon9Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
