@@ -28,6 +28,8 @@ class Falcon9ActivityTest {
 
     @Inject
     lateinit var repository: Falcon9Repository
+    private val fakeFalcon9Repository: FakeFalcon9Repository
+        get() = repository as FakeFalcon9Repository
 
     @Before
     fun setup() {
@@ -41,7 +43,7 @@ class Falcon9ActivityTest {
 
     @Test
     fun whenRepositoryIsLoading_thenLoadingShown() {
-        (repository as FakeFalcon9Repository).response = Single.never()
+        fakeFalcon9Repository.response = Single.never()
         scenario = launchActivity()
 
         Falcon9ActivityRobot()
@@ -50,7 +52,7 @@ class Falcon9ActivityTest {
 
     @Test
     fun whenRepositoryResponseIsError_thenErrorShown() {
-        (repository as FakeFalcon9Repository).response = Single.error(Exception())
+        fakeFalcon9Repository.response = Single.error(Exception())
         scenario = launchActivity()
 
         Falcon9ActivityRobot()
@@ -59,7 +61,7 @@ class Falcon9ActivityTest {
 
     @Test
     fun whenRepositoryReturnsAResponse_thenListOfLaunchesShown() {
-        (repository as FakeFalcon9Repository).response = Single.just(LAUNCHES)
+        fakeFalcon9Repository.response = Single.just(LAUNCHES)
         scenario = launchActivity()
 
         Falcon9ActivityRobot()
