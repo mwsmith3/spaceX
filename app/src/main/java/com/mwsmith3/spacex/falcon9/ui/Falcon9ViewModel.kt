@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mwsmith3.spacex.falcon9.data.Falcon9Repository
 import com.mwsmith3.spacex.falcon9.domain.model.Falcon9Launch
+import com.mwsmith3.spacex.schedulers.AppSchedulers
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
 class Falcon9ViewModel @Inject constructor(
+    private val schedulers: AppSchedulers,
     private val falcon9Repository: Falcon9Repository
 ) : ViewModel() {
 
@@ -28,8 +28,8 @@ class Falcon9ViewModel @Inject constructor(
     private fun load() {
         disposables.add(
             falcon9Repository.getFalcon9Launches()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(schedulers.io)
+                .observeOn(schedulers.main)
                 .subscribe({
                     _state.value = State.Success(it)
                 }, {
