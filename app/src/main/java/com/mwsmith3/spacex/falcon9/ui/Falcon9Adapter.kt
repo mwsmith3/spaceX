@@ -36,9 +36,10 @@ class Falcon9Adapter(
                 title.text = launch.name
                 date.text = getDateString(root.context, launch.launchDate)
                 successImg.setImageResource(getStatusImg(launch.success))
-                launch.imageUrl?.let {
+                patch.isVisible = launch.imageUrl != null
+                if (launch.imageUrl != null) {
                     Glide.with(root.context).load(launch.imageUrl).into(patch)
-                } ?: run { patch.isVisible = false }
+                }
             }
         }
 
