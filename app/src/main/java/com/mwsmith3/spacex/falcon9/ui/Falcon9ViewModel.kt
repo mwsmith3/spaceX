@@ -33,17 +33,14 @@ class Falcon9ViewModel @Inject constructor(
                 .subscribe({
                     _state.value = State.Success(it)
                 }, {
-                    _state.value = State.Error(it.message.toString())
+                    _state.value = State.Error
                 })
         )
     }
 
     sealed class State {
         object Loading : State()
-        data class Error(
-            val message: String
-        ) : State()
-
+        object Error : State()
         data class Success(
             val launches: List<Falcon9Launch>
         ) : State()

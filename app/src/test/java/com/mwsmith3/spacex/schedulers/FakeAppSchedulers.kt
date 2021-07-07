@@ -1,13 +1,12 @@
 package com.mwsmith3.spacex.schedulers
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class FakeAppSchedulers : AppSchedulers {
+object FakeAppSchedulers : AppSchedulers {
     override val main: Scheduler
-        get() = AndroidSchedulers.mainThread()
+        get() = Schedulers.trampoline()
 
     override val io: Scheduler
-        get() = Schedulers.io()
+        get() = Schedulers.trampoline()
 }
