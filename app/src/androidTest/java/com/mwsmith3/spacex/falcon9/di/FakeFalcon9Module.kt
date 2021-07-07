@@ -1,4 +1,4 @@
-package com.mwsmith3.spacex.di
+package com.mwsmith3.spacex.falcon9.di
 
 import com.mwsmith3.spacex.falcon9.data.FakeFalcon9Repository
 import com.mwsmith3.spacex.falcon9.data.Falcon9Repository
@@ -11,9 +11,9 @@ import javax.inject.Singleton
 @Module
 @TestInstallIn(
     components = [SingletonComponent::class],
-    replaces = [RepositoryModule::class]
+    replaces = [Falcon9Module::class]
 )
-abstract class FakeRepositoryModule {
+abstract class FakeFalcon9Module {
     @Singleton
     @Binds
     abstract fun bindFalcon9Repository(
